@@ -1,0 +1,36 @@
+:root {
+  --LightBlue: #12b3eb;
+  --DarkBlue: #5460f9;
+  --LightWhite: rgba(255, 255, 255, 0.591);
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.forgot-password {
+    color: var(--DarkBlue);
+}
+
+.forgot-password a:hover {
+    color: var(--LightBlue);
+    transition: all 0.3s;
+}
+
+.sign-up-btn {
+    color: white;
+    background-color: var(--DarkBlue);
+}
+
+.sign-up-btn:hover {
+    background: var(--LightBlue);
+    transition: all 0.3s;
+}
+
+.sign-up-icon {
+    color: var(--LightWhite);
+}
+
+a {
+    transition: all 0.3s;
+}
