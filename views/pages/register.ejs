@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Login</title>
+    <title>Online Book Store</title>
 </head>
 
 <body>
@@ -21,10 +21,20 @@
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Online Book Store
                 </h2>
             </div>
-            <form class="mt-8 space-y-6" action="/" method="POST">
+            <form class="mt-8 space-y-6" action="/register" method="POST">
 
                 <div class="space-y-2 rounded-md shadow-sm">
-                    
+                    <div>
+                        <!-- <label for="email-address" class="sr-only">Email address</label> -->
+                        <input id="first-name" name="fName" type="text" autocomplete="first-name" required
+                            class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                            placeholder="First name">
+                    </div>
+                    <div>
+                        <input id="last-name" name="lName" type="text" autocomplete="last-name" required
+                            class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                            placeholder="Last name">
+                    </div>
                     <div>
                         <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm" placeholder="Email address">
                     </div> 
@@ -34,22 +44,23 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="sign-up-btn group relative flex w-full justify-center rounded-md border border-transparent hover:bg-blue-800 bg-blue-600 py-2 px-4 text-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300">
+                    <button type="submit" class="sign-up-btn group relative flex w-full justify-center rounded-md border border-transparent hover:bg-blue-800 transition-all duration-500 bg-blue-600 py-2 px-4 text-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                       <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <!-- Heroicon name: mini/lock-closed -->
                         <svg class="sign-up-icon h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
                         </svg>
                       </span>
-                      Login
+                      Sign Up
                     </button>
                   </div>
 
                   <div class="flex items-center justify-center">
-                    <p>New to Online Book Store?
-                        <form action="/register" method="post">
-                            <a href="register" class="text-blue-500 hover:text-blue-800 transition-all duration-300">Sign Up</a>
-                        </form>
+                    <p>Already have an account?
+                        <!-- <form action="/login" method="post" name="button">
+                            <button class="text-blue-600 hover:text-blue-800 transition-all duration-500 cursor-pointer">Log in</button>
+                        </form> -->
+                        <a class="text-blue-600 hover:text-blue-800 transition-all duration-500 cursor-pointer" href="login">Log In</a>
                     </p>
                   </div>
             
