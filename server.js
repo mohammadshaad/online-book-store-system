@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
 let uid = 1;
-
+let alert = "hidden bg-blue-500";
 
 // database packages and connections start
 const mysql = require('mysql2');
@@ -25,16 +25,23 @@ var connection = mysql.createConnection(
     {
         host: "localhost",
         user: "root",
-        password: "root",
-        port: '/var/run/mysqld/mysqld.sock',
+        password: "oppo-098",
+        port: '3306',
         database: "online_book_store"
     }
 );
 
 connection.connect(
     function (err) {
-        if (err) throw err;
-        console.log("Connected!");
+        try {
+            console.log("Connected!");
+        }
+
+        catch {
+            console.log("Error!");
+        }
+        // if (err) throw "Parameter not found";
+        // console.log("Connected!");
     }
 );
 
@@ -46,7 +53,7 @@ connection.on('error', function (err) {
 
 
 app.get("/login", function (req, res) {
-    res.render("pages/login.ejs");
+    res.render("pages/login.ejs", {alert: alert});
 });
 
 app.post("/login", function (req, res) {
@@ -60,7 +67,7 @@ app.post("/login", function (req, res) {
         if (err) throw err;
         if (row[0].PASSWORD == req.body.password) {
             console.log("Validated succesfully!");
-
+            alert = "hidden";
             let dataquery = `SELECT * FROM inventory`
             connection.query(dataquery, (err, row, fields) => {
                 if (err) throw err;
@@ -68,14 +75,16 @@ app.post("/login", function (req, res) {
                 console.log(row.slice(0, 5));
                 res.render("pages/index.ejs", {
                     books: row,
-                    recbooks: row.slice(0, 5)
+                    recbooks: row.slice(0, 5),
+                    alert: alert
                 });
             }
             );
         }
         else {
             console.log("Invalid credentials");
-            res.render("pages/login.ejs");
+            alert = "block";
+            res.render("pages/login.ejs", {alert: alert});
         }
 
     }
