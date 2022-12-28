@@ -94,7 +94,8 @@
         <!-- book tile starts -->
         <% books.forEach((book)=> { %>
           <div class="books w-80 h-96 flex items-center justify-center flex-col rounded-lg m-10">
-            <div class="flex items-center justify-center flex-col w-full h-auto rounded-lg gap-4 bg-white shadow-xl p-5">
+            <div
+              class="flex items-center justify-center flex-col w-full h-auto rounded-lg gap-4 bg-white shadow-xl p-5">
               <div class="image-container flex items-center justify-center w-full h-full">
                 <img src=<%="book" + book.IDX + ".jpeg" %> alt="book-image" class="w-30 h-60 rounded-lg">
               </div>
@@ -116,7 +117,7 @@
               </div>
               <div class="button-container flex w-full h-full items-center justify-center">
                 <form action="/cart" method="post">
-                  
+
                   <a href="cart"
                     class="w-40 h-10 bg-blue-500 hover:bg-blue-800 text-white flex items-center justify-center text-center rounded-md transition-all duration-500 hover:border-blue-800 cursor-pointer gap-4">
                     <i class="fa-solid fa-cart-shopping transition-all duration-500"></i>
@@ -144,19 +145,39 @@
     <div class="books flex items-start justify-center flex-col gap-6">
       <h2 class="font-bold text-3xl text-blue-700">Recommended Books</h2>
       <% recbooks.forEach((book)=> { %>
-        <div class="rec-wrapper flex items-center justify-center gap-6">
-          <img src=<%="book" + book.IDX + ".jpeg" %> alt="" class="w-20 h-auto">
-          <div class="text flex items-start justify-center flex-col">
-            <p class="title text-center font-medium text-1xl">
-              <%= book.BNAME %>
-            </p>
-            <p class="author text-center">
-              <%= book.BAUTH %>
-            </p>
-            <div class="rating">
-
+        <div class="rec-wrapper w-full flex items-center justify-start gap-6">
+          <img src=<%="book" + book.IDX + ".jpeg" %> alt="" class="w-20 h-auto rounded-md">
+          <div class="rec-subcontainer flex items-center justify-between w-full">
+            <div class="rec-subwrapper">
+              <div class="text flex items-start justify-center flex-col">
+                <p class="title text-center font-medium text-2xl">
+                  <%= book.BNAME %>
+                </p>
+                <p class="author text-center">
+                  <%= book.BAUTH %>
+                </p>
+                <div class="stars text-sm mt-5">
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star text-yellow-500"></i>
+                  <i class="fa-solid fa-star-half-stroke text-yellow-500"></i>
+                  <i class="fa-regular fa-star text-yellow-500"></i>
+                  <span class="text-sm">4.5 stars</span>
+                </div>
+              </div>
+            </div>
+            <div class="rec-subwrapper">
+              <form action="/cart" method="post">
+  
+                <a href="cart"
+                  class="w-40 h-10 bg-blue-500 hover:bg-blue-800 text-white flex items-center justify-center text-center rounded-md transition-all duration-500 hover:border-blue-800 cursor-pointer gap-4">
+                  <i class="fa-solid fa-cart-shopping transition-all duration-500"></i>
+                  Add to Cart
+                </a>
+              </form>
             </div>
           </div>
+
         </div>
         <% }) %>
     </div>
