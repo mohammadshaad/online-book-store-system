@@ -67,7 +67,7 @@ app.post("/login", function (req, res) {
         if (err) throw err;
         if (row[0].PASSWORD == req.body.password) {
             console.log("Validated succesfully!");
-            alert = "hidden";
+            alert = "hidden";  
             let dataquery = `SELECT * FROM inventory`
             connection.query(dataquery, (err, row, fields) => {
                 if (err) throw err;
@@ -177,6 +177,24 @@ app.get("/about", function (req, res) {
 app.post("/about", function (req, res) {
     res.render("pages/about.ejs");
 });
+
+app.get("/buy", function (req, res){
+    let dataquery = `SELECT * FROM inventory`
+    connection.query(dataquery, (err, row, fields) => {
+        if (err) throw err;
+        console.log(row);
+        // console.log(row.slice(0, 5));
+        res.render("pages/buy.ejs", {
+            books: row,
+            recbooks: row
+        });
+    }
+    );
+})
+
+app.post("/buy", function (req, res) {
+    res.render("pages/buy.ejs");
+})
 
 app.get("/", function (req, res) {
     res.render("pages/register.ejs");
