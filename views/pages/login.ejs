@@ -8,6 +8,9 @@
 
   <link rel="stylesheet" href="./public/css/style.css">
 
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
 
   <title>Login</title>
@@ -15,7 +18,7 @@
 
 <body>
 
-  <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8" data-aos="zoom-out" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500">
     <div class="w-full max-w-md space-y-8">
       <div>
         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Online Book Store
@@ -54,7 +57,7 @@
         </div>
 
 
-        <div class=<%= alert %>>
+        <div class=<%=alert %>>
           <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <strong class="font-bold">Try again!</strong>
             <span class="block sm:inline">Email or password entered is wrong</span>
@@ -82,6 +85,10 @@
   </div>
 
 
+
+  <script>
+    AOS.init();
+  </script>
 </body>
 
 </html>
