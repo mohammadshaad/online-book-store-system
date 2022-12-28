@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Online Book Store</title>
 </head>
@@ -88,7 +92,7 @@
 
 
   <div class="container w-full h-full flex items-start justify-center flex-col bg-blue-600">
-    <div class="wrapper mt-5 mb-5 w-full h-full flex items-start justify-center flex-col gap-20">
+    <div class="wrapper mt-5 mb-5 w-full h-full flex items-start justify-center flex-col gap-20" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
       <!-- <h2 class="m-10">Welcome to Online Book Store!</h2> -->
       <div class="book-container w-full h-full flex items-center justify-center flex-wrap gap-12">
         <!-- book tile starts -->
@@ -141,7 +145,7 @@
 
   <!-- reccomended book starts -->
 
-  <div class="rec-books-container m-10 flex justify-center flex-col gap-4">
+  <div class="rec-books-container m-10 flex justify-center flex-col gap-4" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="600">
     <div class="books flex items-start justify-center flex-col gap-6">
       <h2 class="font-bold text-3xl text-blue-700">Recommended Books</h2>
       <% recbooks.forEach((book)=> { %>
@@ -168,7 +172,7 @@
             </div>
             <div class="rec-subwrapper">
               <form action="/cart" method="post">
-  
+
                 <a href="cart"
                   class="w-40 h-10 bg-blue-500 hover:bg-blue-800 text-white flex items-center justify-center text-center rounded-md transition-all duration-500 hover:border-blue-800 cursor-pointer gap-4">
                   <i class="fa-solid fa-cart-shopping transition-all duration-500"></i>
@@ -190,6 +194,9 @@
 
 
 
+  <script>
+    AOS.init();
+  </script>
   <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 </body>
 
