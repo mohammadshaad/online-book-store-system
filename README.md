@@ -21,8 +21,8 @@ The online book store system can be used by people across the world, to purchase
 
 **Features:**
 - Selection of books is done using the system through a simple registration process, wherein a form can be filled by the user provided by the website. This form can be built using MySQL in the GCP.
-- Suppose the book searched by the user isn’t available, the user receives the notification regarding the same then and there.
--	Complete details regarding the books are made available on the website for the user.
+- User login is authenticated.
+-	Add to cart option for books selected.
 -	Easy to use
 
 **Implementation:**
@@ -35,18 +35,20 @@ MySQL is one of the easy to understand and proficient languages available today,
 **Google Cloud resources required:**
 -	Compute engine - Virtual machine to host web application
 -	Cloud SQL - Backend MySQL database to store book details
--	Cloud functions - To update the database when a book has been added or removed from the inventory
+-	Cloud Storage - Storing book cover thumbnails and users’ profile picture
 
 **Suggestive Additions to the Project:**
-The following features can be added to the project with subsequent updates:
--	User registration validation
--	Provision for returning books
--	Request for books not in list/out of stock
--	Option to review books
+*The following features can be added to the project with subsequent updates:*
+-	User registration validation.
+-	Provision for returning books.
+-	Request for books not in list/out of stock.
+-	Option to review books.
 -	Subscription to auto-deliver newsletters/magazines for every edition.
--	Donate money/new books/used books to help educate underprivileged children
+-	Donate money/new books/used books to help educate underprivileged children.
 -	Provide an online sample of a few pages per book, to encourage users to purchase the product.
 
 **Web Application by**:*@mohammadshaad*
+
 **DataBase by**:*Abirami*
+
 **Documentation by**:*@deepthi1129*
