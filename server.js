@@ -16,10 +16,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
 let uid = 1;
+let alert = "hidden bg-blue-500";
+let cartAlert = "hidden";
 
+let selected = [];
 
 // database packages and connections start
 const mysql = require('mysql2');
+const { captureRejectionSymbol } = require("events");
 
 var connection = mysql.createConnection(
     {
@@ -46,7 +50,7 @@ connection.on('error', function (err) {
 
 
 app.get("/login", function (req, res) {
-    res.render("pages/login.ejs");
+    res.render("pages/login.ejs",{alert: alert});
 });
 
 app.post("/login", function (req, res) {
@@ -60,6 +64,7 @@ app.post("/login", function (req, res) {
         if (err) throw err;
         if (row[0].PASSWORD == req.body.password) {
             console.log("Validated succesfully!");
+            cartAlert = "hidden";
 
             let dataquery = `SELECT * FROM inventory`
             connection.query(dataquery, (err, row, fields) => {
@@ -68,14 +73,16 @@ app.post("/login", function (req, res) {
                 console.log(row.slice(0, 5));
                 res.render("pages/index.ejs", {
                     books: row,
-                    recbooks: row.slice(0, 5)
+                    recbooks: row.slice(0, 5),
+                    cartAlert:cartAlert
                 });
             }
             );
         }
         else {
             console.log("Invalid credentials");
-            res.render("pages/login.ejs");
+            alert = "block";
+            res.render("pages/login.ejs",{alert: alert});
         }
 
     }
@@ -147,7 +154,8 @@ app.get("/index", function (req, res) {
         console.log(row.slice(0, 5));
         res.render("pages/index.ejs", {
             books: row,
-            recbooks: row.slice(0, 5)
+            recbooks: row.slice(0, 5),
+            cartAlert: cartAlert
         });
     }
     );
@@ -155,8 +163,26 @@ app.get("/index", function (req, res) {
 });
 
 app.post("/index", function (req, res) {
-    res.render("pages/index.ejs");
+    cartAlert = "hidden";
+    res.render("pages/index.ejs",{cartAlert: cartAlert});
 
+});
+
+app.post('/addToCart', (req, res) => {
+    selected.push(req.body.bookId);
+    cartAlert = "block";
+    console.log(selected);
+    let dataquery = `SELECT * FROM inventory`
+    connection.query(dataquery, (err, row, fields) => {
+        if (err) throw err;
+        console.log(row);
+        res.render("pages/index.ejs", {
+            books: row,
+            recbooks: row.slice(0, 5),
+            cartAlert: cartAlert
+        });
+    }
+    );
 });
 
 
@@ -168,6 +194,23 @@ app.get("/about", function (req, res) {
 app.post("/about", function (req, res) {
     res.render("pages/about.ejs");
 });
+
+app.get("/cart", function (req, res) {
+    let dataquery = `SELECT * FROM inventory WHERE IDX in (`;
+    for(var i=0; i<selected.length; i++){
+        if(i!=selected.length-1) dataquery = dataquery + selected[i] + ",";
+        else dataquery = dataquery + selected[i] + ')';
+    };
+    console.log(dataquery);
+    connection.query(dataquery, (err, row, fields) => {
+        if (err) throw err;
+        console.log(row);
+        res.render("pages/cart.ejs", {books: row});
+    });
+});
+// app.post("/cart", function (req, res) {
+    
+// })
 
 app.get("/", function (req, res) {
     res.render("pages/register.ejs");
