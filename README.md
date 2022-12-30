@@ -56,6 +56,6 @@ MySQL is one of the easy to understand and proficient languages available today,
 
 **Web Application by**: *@mohammadshaad*
 
-**DataBase by**: *Abirami*
+**DataBase by**: *@A-b-i-r-a-m-i-G-S*
 
 **Documentation by**: *@deepthi1129*
