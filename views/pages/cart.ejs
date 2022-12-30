@@ -7,13 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Online Book Store</title>
 </head>
 
-<body class="font-serif box-border">
+<body class="font-serif box-border bg-blue-100">
 
-    <nav class="bg-blue-100 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 w-full">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
             <a href="#" class="flex items-center">
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Online Book
@@ -37,16 +44,13 @@
                     </div>
                     <ul class="py-1" aria-labelledby="user-menu-button">
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                            <a href="cart"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Your
+                                Cart</a>
                         </li>
                         <li>
                             <a href="#"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
                         </li>
                         <li>
                             <a href="login"
@@ -69,17 +73,15 @@
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                 <ul
-                    class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:hover:text-blue-500 md:mt-0 md:text-sm md:font-medium md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
                         <a href="index"
-                            class="block py-2 pl-3 pr-4 text-gray-700 rounded md:hover:text-blue-500 md:bg-transparent md:p-0 dark:text-white"
+                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <form action="/about" method="post">
-                            <a href="about"
-                                class="block py-2 pl-3 pr-4 text-gray-700 rounded md:hover:text-blue-500 md:bg-transparent md:p-0 dark:text-white">About</a>
-                        </form>
+                        <a href="about"
+                            class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-500 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                     </li>
                 </ul>
             </div>
@@ -87,32 +89,34 @@
     </nav>
 
 
-    <!-- <div class="container">
-        <div class="wrapper">
+
+    <div class="rec-books-container m-10 flex justify-center flex-col gap-4" data-aos="fade-up" data-aos-easing="linear"
+        data-aos-duration="600">
+        <div class="books flex items-start justify-center flex-col gap-6">
+            <h2 class="font-bold text-3xl text-blue-700">Selected Books</h2>
             <% books.forEach((book)=> { %>
-                <div class="books w-80 h-96 flex items-center justify-center flex-col rounded-lg m-5">
-                  <div class="flex items-center justify-center flex-col w-full h-auto shadow-xl rounded-lg gap-4 bg-white">
-                    <div class="image-container flex items-center justify-center w-full h-full">
-                      <img src=<%="book" + book.IDX + ".jpeg" %> alt="book-image" class="w-30 h-60">
+                <div class="rec-wrapper w-full flex items-center justify-start gap-6">
+                    <img src=<%="book" + book.IDX + ".jpeg" %> alt="" class="w-20 h-auto rounded-md">
+                    <div class="rec-subcontainer flex items-center justify-between w-full">
+                        <div class="rec-subwrapper">
+                            <div class="text flex items-start justify-center flex-col">
+                                <p class="title text-center font-medium text-2xl">
+                                    <%= book.BNAME %>
+                                </p>
+                                <p class="author text-center">
+                                    <%= book.BAUTH %>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text font-lg">
-                      <p class="title text-center font-bold text-2xl">
-                        <%= book.BNAME %>
-                      </p>
-                      <p class="author text-center font-medium text-1xl">
-                        <%= book.BAUTH %>
-                      </p>
-                    </div>
-                  </div>
                 </div>
                 <% }) %>
-        </div> -->
+        </div>
     </div>
 
-    
-
-
-
+    <script>
+        AOS.init();
+    </script>
     <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 </body>
 

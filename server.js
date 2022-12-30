@@ -17,9 +17,13 @@ app.set('view engine', 'html');
 
 let uid = 1;
 let alert = "hidden bg-blue-500";
+let cartAlert = "hidden";
+
+let selected = [];
 
 // database packages and connections start
 const mysql = require('mysql2');
+const { captureRejectionSymbol } = require("events");
 
 var connection = mysql.createConnection(
     {
@@ -33,15 +37,8 @@ var connection = mysql.createConnection(
 
 connection.connect(
     function (err) {
-        try {
-            console.log("Connected!");
-        }
-
-        catch {
-            console.log("Error!");
-        }
-        // if (err) throw "Parameter not found";
-        // console.log("Connected!");
+        if (err) throw err;
+        console.log("Connected!");
     }
 );
 
@@ -53,7 +50,7 @@ connection.on('error', function (err) {
 
 
 app.get("/login", function (req, res) {
-    res.render("pages/login.ejs", {alert: alert});
+    res.render("pages/login.ejs",{alert: alert});
 });
 
 app.post("/login", function (req, res) {
@@ -67,7 +64,8 @@ app.post("/login", function (req, res) {
         if (err) throw err;
         if (row[0].PASSWORD == req.body.password) {
             console.log("Validated succesfully!");
-            alert = "hidden";  
+            cartAlert = "hidden";
+
             let dataquery = `SELECT * FROM inventory`
             connection.query(dataquery, (err, row, fields) => {
                 if (err) throw err;
@@ -76,7 +74,7 @@ app.post("/login", function (req, res) {
                 res.render("pages/index.ejs", {
                     books: row,
                     recbooks: row.slice(0, 5),
-                    alert: alert
+                    cartAlert:cartAlert
                 });
             }
             );
@@ -84,7 +82,7 @@ app.post("/login", function (req, res) {
         else {
             console.log("Invalid credentials");
             alert = "block";
-            res.render("pages/login.ejs", {alert: alert});
+            res.render("pages/login.ejs",{alert: alert});
         }
 
     }
@@ -154,18 +152,41 @@ app.get("/index", function (req, res) {
         if (err) throw err;
         console.log(row);
         console.log(row.slice(0, 5));
-        res.render("pages/index.ejs", {
-            books: row,
-            recbooks: row.slice(0, 5)
-        });
+        connection.query(`SELECT * FROM Stars`, (err, star, fields) => {
+            console.log(star);
+            res.render("pages/index.ejs", {
+                books: row,
+                recbooks: row.slice(0, 5),
+                cartAlert: cartAlert,
+                stars: star
+            });
+        })
     }
     );
 
 });
 
 app.post("/index", function (req, res) {
-    res.render("pages/index.ejs");
+    cartAlert = "hidden";
+    res.render("pages/index.ejs",{cartAlert: cartAlert});
 
+});
+
+app.post('/addToCart', (req, res) => {
+    selected.push(req.body.bookId);
+    cartAlert = "block";
+    console.log(selected);
+    let dataquery = `SELECT * FROM inventory`
+    connection.query(dataquery, (err, row, fields) => {
+        if (err) throw err;
+        console.log(row);
+        res.render("pages/index.ejs", {
+            books: row,
+            recbooks: row.slice(0, 5),
+            cartAlert: cartAlert
+        });
+    }
+    );
 });
 
 
@@ -178,23 +199,22 @@ app.post("/about", function (req, res) {
     res.render("pages/about.ejs");
 });
 
-app.get("/buy", function (req, res){
-    let dataquery = `SELECT * FROM inventory`
+app.get("/cart", function (req, res) {
+    let dataquery = `SELECT * FROM inventory WHERE IDX in (`;
+    for(var i=0; i<selected.length; i++){
+        if(i!=selected.length-1) dataquery = dataquery + selected[i] + ",";
+        else dataquery = dataquery + selected[i] + ')';
+    };
+    console.log(dataquery);
     connection.query(dataquery, (err, row, fields) => {
         if (err) throw err;
         console.log(row);
-        // console.log(row.slice(0, 5));
-        res.render("pages/buy.ejs", {
-            books: row,
-            recbooks: row
-        });
-    }
-    );
-})
-
-app.post("/buy", function (req, res) {
-    res.render("pages/buy.ejs");
-})
+        res.render("pages/cart.ejs", {books: row});
+    });
+});
+// app.post("/cart", function (req, res) {
+    
+// })
 
 app.get("/", function (req, res) {
     res.render("pages/register.ejs");
