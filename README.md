@@ -54,8 +54,8 @@ MySQL is one of the easy to understand and proficient languages available today,
 -	Donate money/new books/used books to help educate underprivileged children.
 -	Provide an online sample of a few pages per book, to encourage users to purchase the product.
 
-**Web Application by**:*@mohammadshaad*
+**Web Application by**: *@mohammadshaad*
 
-**DataBase by**:*Abirami*
+**DataBase by**: *@A-b-i-r-a-m-i-G-S*
 
-**Documentation by**:*@deepthi1129*
+**Documentation by**: *@deepthi1129*
