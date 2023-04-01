@@ -38,6 +38,7 @@ A full stack web application is created using HTML, CSS, JavaScript, Node.js, Ex
 **MySQL Database:**
 MySQL is one of the easy to understand and proficient languages available today, and its features can be utilised efficiently to build an online system for storing data related to the books.
 
+
 **Google Cloud Resources required:**
 -	Compute engine - Virtual machine to host web application
 -	Cloud SQL - Backend MySQL database to store book details
